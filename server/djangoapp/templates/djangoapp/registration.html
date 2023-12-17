@@ -6,6 +6,62 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
     <body>
+
+    <!-- Nav bar-->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container px-5 border-bottom">
+            <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Dealership Review</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'djangoapp:index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'djangoapp:about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Dealers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact</a></li>
+
+                    {% if user.is_authenticated %}
+                    <div class="ml-auto">
+                        <a class="ml-5 text-white text-center">Hi, {{user.username}}</a>
+                        <a class="btn btn-primary btn-sm" type="button" href="{% url 'djangoapp:logout' %}">Logout</a>
+                    </div>
+                    {% else %}
+                    <form action="{% url 'djangoapp:login' %}"  method="post" class="ml-auto">
+                        {% csrf_token %}
+                        <input type="text" name="username" placeholder="Enter username" required>
+                        <input type="password" name="password" placeholder="Enter password" required>
+                        <input class="btn btn-primary btn-sm text-white" type="submit" value="Login"></input>
+                        <a class="btn btn-primary btn-sm" type="submit" href="{% url 'djangoapp:registration' %}" method="get">Sign Up</a>
+                    </form>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <!--Add a registration form here -->
+    <div role="main" class="d-flex justify-content-center pt-5">
+        <form class="border border-dark p-5 w-50 h-auto bg-light" action="{% url 'djangoapp:registration' %}"  method="post">
+            <div class="form-group flex-column" style="display: flex!important">
+                <h1>Sign Up</h1>
+                <label for="firstName" class="mt-4">First Name</label>
+                <input type="text" placeholder="Enter first name: " name="firstName" required>
+
+                <label for="lastName" class="mt-4">Last Name</label>
+                <input type="text" placeholder="Enter last name: " name="lastName" required>
+
+                <label for="username" class="mt-4">User Name</label>
+                <input type="text" placeholder="Enter username: " name="username" required>
+                
+                <label for="password" class="mt-4">Password</label>
+                <input type="password" placeholder="Enter password: " name="password" required>
+                
+                <div class="h-auto w-auto">
+                    {% csrf_token %}
+                    <button class="btn btn-primary btn-md mt-4" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
     </body>
 </html>
