@@ -1,9 +1,7 @@
-# Final Project Template
+# Final Project IBM Certification
 
-The final project for this course has several steps that you must complete. 
-To give you an overview of the whole project, all the high-level steps are listed below. 
-The project is then divided into several smaller labs that give the detailed instructions for each step. 
-You must complete all the labs to successfully complete the project.
+The final project for the full stack development course given by IBM. 
+The project is divided into smaller prompts that give instructions for each step. 
 
 ## Project Breakdown
 
