@@ -12,11 +12,11 @@ const { CloudantV1 } = require('@ibm-cloud/cloudant');
 const { IamAuthenticator } = require('ibm-cloud-sdk-core');
 
 async function main(param) {
-	const authenticator = new IamAuthenticator({ apikey: "1Wq08to7Fxiz5LZplhhZOvvRqpR8KRc3vuXNJbu3PjDw" });
+	const authenticator = new IamAuthenticator({ apikey: "" }); //apikey here
     const cloudant = CloudantV1.newInstance({
           authenticator: authenticator
       });
-      cloudant.setServiceUrl("https://1d8ebd47-6176-403f-95b8-3c90d5aa2921-bluemix.cloudantnosqldb.appdomain.cloud");
+      cloudant.setServiceUrl(""); //service url here
       try {
           let result = await cloudant.postAllDocs({
               db: 'dealerships',
