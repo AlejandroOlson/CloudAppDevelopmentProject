@@ -5,10 +5,9 @@ from django.utils.timezone import now
 # Create your models here.
 
 class CarMake(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(null=False, max_length=255)
     description = models.TextField()
     year_founded = models.PositiveIntegerField()
-    country_of_origin = models.CharField(max_length=255)
     
     def __str__(self):
         return self.name
@@ -25,18 +24,22 @@ class CarMake(models.Model):
 
 class CarModel(models.Model):
     car_make = models.ForeignKey(CarMake, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
+    name = models.CharField(null=False, max_length=255)
     dealer_id = models.PositiveIntegerField()
     TYPE_CHOICES = [
         ('SEDAN', 'Sedan'),
         ('SUV', 'SUV'),
         ('WAGON', 'Wagon'),
     ]
-    car_type = models.CharField(max_length=20, choices=TYPE_CHOICES)
+    car_type = models.CharField(max_length=25, choices=TYPE_CHOICES)
     year = models.DateField()
     
     def __str__(self):
-        return self.name
+        return "Name: " + self.name + \
+                " Make Name: "+ self.make.name + \
+                " Type: " + self.car_type + \
+                " Dealer ID: " + str(self.dealer_id)+ \
+                " Year: " + str(self.year)
 
 
 # <HINT> Create a plain Python class `CarDealer` to hold dealer data
