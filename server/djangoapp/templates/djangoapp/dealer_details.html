@@ -43,6 +43,13 @@
 
     <!-- Add reviews as cards -->
 
+    <div class="text-center">
+        {% for dealer in dealers %}
+        <h1>Reviews for <strong>{{dealer.full_name}}</strong></h1>
+        {% endfor %}
+    </div>
+
+
     <main role="main" class="container pt-3">
         
         {% if reviews %}
@@ -53,19 +60,23 @@
                     <div class="card-header">
                         <img class="card-img-left" src="{{MEDIA_URL}}/emoji/{{review.sentiment}}.png" width="40" height="40">
                     </div>
-                    
+
                      <div class="card-body text-center">
-                        <h5 class="card-title">{{review.name}}</h5>
+                        {% if review.car_make and review.car_model and review.car_year %}
+                        <h5>{{review.car_make}} {{review.car_model}}, {{review.car_year}}</h5>
+                        {% else %}
+                        <h5>No car information available</h5>
+                        {% endif %}
                         <p class="card-text">{{review.review}}</p>
                      </div>
                      <div class="card-footer text-muted text-center" style="min-height: 74px;">
-                    {% if review.purchase == True%}   
-                        {{review.car_year}} {{review.car_make}} {{review.car_model}}
+                       {{review.name}}
+                    {% if review.purchase == True %}   
                         <br>
                         Purchased on: {{review.purchase_date}}
                     {% else %}
                         <br>
-                        Reviewer did not make a purchase.
+                        Purchased on: N/A
                     {% endif %}
                     </div>
                 </div>
@@ -73,17 +84,16 @@
             {% endfor %}
             <div class="card ">
                      <div class="card-header">
-                            <h5 class="card-title text-center pt-1">Write Your Own Review!</h5>
+                            <h4 class="card-title text-center pt-1">More Reviews</h4>
                     </div>
                     <div class="card-body text-center">
-                        <p class="card-text">Want to review this dealership?</p>
-                        <p class="card-text">Click the button below!</p>
+                        <p class="card-text">Write a review on this dealership</p>
                     </div>
                     <div class="card-footer text-center" style="min-height: 74px;">
                         {% if user.is_authenticated %}
-                            <a class="btn btn-warning btn-lg" type="submit" href="{% url 'djangoapp:add_review' dealer_id %}">Write a Review!</a>
+                            <a class="btn btn-primary btn-md" type="submit" href="{% url 'djangoapp:add_review' dealer_id %}">Add a review</a>
                         {% else %}
-                            <p class="btn btn-success btn-lg" disabled>Login to write a review!</p>
+                            <p class="btn btn-primary btn-md" disabled>Login to write a review</p>
                         {% endif %}
                     </div>
                      
@@ -102,9 +112,9 @@
                     </div>
                     <div class="card-footer text-center" style="min-height: 74px;">
                         {% if user.is_authenticated %}
-                            <a class="btn btn-warning btn-lg" type="submit" href="{% url 'djangoapp:add_review' dealer_id %}">Write a Review!</a>
+                            <a class="btn btn-primary btn-md" type="submit" href="{% url 'djangoapp:add_review' dealer_id %}">Write a review</a>
                         {% else %}
-                            <p class="btn btn-success nohover">Login to write a review!</p>
+                            <p class="btn btn-primary">Login to write a review!</p>
                         {% endif %}
                     </div>
                      

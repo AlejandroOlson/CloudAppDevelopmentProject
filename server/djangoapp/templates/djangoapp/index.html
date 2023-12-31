@@ -46,22 +46,6 @@
         </div>
     </nav>
 
-    
-    {% comment %} <!-- Dealer table -->
-
-    {% if context %}
-        <ul>
-        {% for dealerships in context %}
-            <div>
-                <img src="{{ MEDIA_URL }}/{{ dealerships.image }}" width="360" height="360" >
-                <h1><b>{{ dealerships.name }}</b></h1>
-            </div>
-        {% endfor %}
-        </ul>
-    {% else %}
-    <p>No dealerships are available.</p>
-    {% endif %}    {% endcomment %}
-
     <!--Add a dealer table here -->
     <main role="main" class="container pt-3">
         <table class="table" id="table" data-filter-control="true">
@@ -80,8 +64,7 @@
                 {% for dealer in dealership_list %}
                     <tr>
                         <td>{{dealer.id}}</td>
-                        {% comment %} <a href="{% url 'djangoapp:dealer_details' dealer.id %}"></a> {% endcomment %}
-                        <td>{{dealer.full_name}}</td> 
+                        <td><a href="{% url 'djangoapp:dealer_details' dealer.id %}">{{dealer.full_name}}</td></a>
                         <td>{{dealer.city}}</td>
                         <td>{{dealer.address}}</td>
                         <td>{{dealer.zip}}</td>
@@ -110,5 +93,11 @@
     </footer>
 
 </body>
+
+<script>
+    $(function() {
+      $('#table').bootstrapTable()
+    })
+  </script>
 
 </html>
