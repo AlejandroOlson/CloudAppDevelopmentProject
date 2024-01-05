@@ -63,7 +63,7 @@
                     <label for="check"><b>Has purchased the car from {{dealer_name}}</b></label>
                 </div>
 
-                <label for="car"><b>Select your car (model/make/year):</b></label>
+                <label for="car"><b>Select your car (year/make/model):</b></label>
                 <select name="car" id="car" class="form-select" required>
                     {% for car in cars %}
                         <option selected value="{{car.make.name}}|{{car.name}}|{{ car.year|date:'Y' }}">{{ car.year|date:"Y" }} {{car.make.name}} {{car.name}}</option>

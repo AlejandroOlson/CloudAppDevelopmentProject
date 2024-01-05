@@ -7,6 +7,7 @@ from .models import CarDealer, DealerReview, CarModel, CarMake
 # from .restapis import related methods
 from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, post_request, get_dealer_name_by_id
 from django.contrib.auth import login, logout, authenticate
+from ibmcloudant.cloudant_v1 import CloudantV1, Document
 from django.contrib import messages
 from datetime import datetime
 import logging
@@ -141,7 +142,9 @@ def add_review(request, dealer_id):
                 review["car_year"]=None
             
             try:
+                
                 json_result = post_request("https://us-east.functions.cloud.ibm.com/api/v1/namespaces/fad374cf-c18a-41c6-982d-ee443d8ccb92/actions/api/add-review.json", review, dealerId=dealer_id)
+                
             except:
                 print("Your review was not submitted, an error occurred.")
                 
