@@ -4,7 +4,7 @@ A full stack web application for a car dealership reviews site.
 
 ## Breakdown
 
-**Django and IBM Cloud
+**Django and IBM Cloud**
 1. Using the Watson Natural language Understanding (NLU)
 2. Ant Database
 
@@ -22,6 +22,6 @@ A full stack web application for a car dealership reviews site.
 2. Created a page that shows reviews for a selected dealer
 3. Created a page that lets the user add a review for a selected dealer
 
-**Containerize your application**
+**Containerized and deployed**
 1. Added deployment artifacts using Docker
 2. Deployed application using Kubernetes
